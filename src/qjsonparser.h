@@ -4,6 +4,8 @@
 #include <QVariantMap>
 
 struct QJsonData;
+class QScriptValue;
+class QScriptEngine;
 
 class QJsonParser
 {
@@ -11,14 +13,16 @@ public:
     static QJsonParser& instance();
     ~QJsonParser();
 
-    QVariantMap parse();
-    QString serialize();
+    QVariantMap parse(const QString& string) const;
+    QString serialize(const QVariant& value) const;
 
 protected:
     QJsonParser();
 
 private:
     QJsonData* d;
+    static QScriptValue CreateValue(const QVariant& value, QScriptEngine& engine);
+
 
 };
 
