@@ -28,11 +28,16 @@ QJsonParser::QJsonParser()
 {
     d = new QJsonData;
 
-    const QString script =
-            "function parse_json(string) { return JSON.parse(string); }\n"
-            "function serialize_json(object) { return JSON.stringify(object); }";
+    //    const QString script =
+    //            "function parse_json(string) { return JSON.parse(string); }\n"
+    //            "function serialize_json(object) { return JSON.stringify(object); }";
 
+    //    QScriptValue result = d->engine.evaluate(script);
+
+    const QString script = "function parse_json(string) { return JSON.parse(string); }\n"
+            "function serialize_json(object) { return JSON.stringify(object); }";
     QScriptValue result = d->engine.evaluate(script);
+
 
     d->parseFn = d->engine.globalObject().property("parse_json");
     d->serializeFn = d->engine.globalObject().property("serialize_json");
@@ -78,7 +83,7 @@ QScriptValue QJsonParser::CreateValue(const QVariant& value, QScriptEngine& engi
         QScriptValue array = engine.newArray(list.length());
         for(int i=0; i < list.length(); ++i)
             array.setProperty(i, CreateValue(list.at(i), engine));
-            //array.setProperty(i, ::CreateValue(list.at(i), engine));
+        //array.setProperty(i, ::CreateValue(list.at(i), engine));
 
         return array;
     }
