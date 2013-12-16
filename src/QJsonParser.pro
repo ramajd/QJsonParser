@@ -1,5 +1,8 @@
+QT += core script
+
 HEADERS += \
     qjsonparser.h
 
 SOURCES += \
-    qjsonparser.cpp
+    qjsonparser.cpp \
+    main.cpp
